@@ -1,30 +1,34 @@
-# FreeRTOS on ATmega32
+# FreeRTOS with Interrupt and Semaphore Example
 
-🔧 This project demonstrates the usage of FreeRTOS on ATmega32 microcontroller to manage two tasks concurrently.
+This project demonstrates the usage of FreeRTOS on ATmega32 microcontroller with interrupts and semaphores to manage tasks.
 
 ## Description
 
-📝 The project initializes two tasks, `Task1` and `Task2`, which execute concurrently with different priorities. FreeRTOS scheduler handles these tasks efficiently.
+This project utilizes interrupts along with FreeRTOS tasks to control concurrent execution. One task, `task_ISR`, is triggered by an external interrupt (e.g., a button press) to perform an action while synchronized with other tasks.
 
 ## Task Priorities
 
-- `Task1`: Priority 2
-- `Task2`: Priority 1
+- `Task_ISR`: Priority 1
 
 ## Task Codes
 
-- `task1_code`: Displays "I am Task 1" on the LCD screen every 2 seconds.
-- `task2_code`: Displays "I am Task 2" on the LCD screen every 1 second.
+- `task_ISR`: Handles the button press interrupt and displays a message on the LCD.
 
 ## Task Handling
 
-🔄 FreeRTOS handles the execution of tasks through its task scheduler. Tasks are created using the `xTaskCreate()` function, specifying their respective entry functions (`task1_code` and `task2_code`), stack size, priority, and other parameters.
+The `task_ISR` function is triggered by an external interrupt and executes asynchronously. It waits for the semaphore (`task_sync_sem`) to be released before performing its action. Upon execution, it releases the semaphore to allow other tasks to proceed.
 
-Once tasks are created, the scheduler decides which task to run based on their priorities. Higher priority tasks preempt lower priority tasks, ensuring that critical tasks are executed promptly.
+## Initialization
 
-Tasks can be suspended or delayed using FreeRTOS API functions like `vTaskDelay()`, allowing for precise timing control. When a task is delayed, the scheduler switches to another task until the delay expires.
+1. `task_sync_sem`: Counting semaphore for synchronizing the ISR task with other tasks.
+2. Interrupt setup: Configure external interrupt (`INT0`) and its callback function (`Task_Realse`) to release the semaphore.
 
-Overall, FreeRTOS provides a flexible and efficient mechanism for multitasking on microcontrollers like ATmega32, enabling developers to build complex embedded systems with ease.
+## Demo
 
-## Demo GIF
-![VID_20240318_141622-ezgif com-video-to-gif-converter](https://github.com/AhmedMohamedomar74/FreeRTOS-on-ATmega32/assets/119351564/ac27c002-0fe6-4121-af4a-d577e15e5be6)
+You can watch a demo of this project to see how the interrupt-driven task is triggered in the attached GIF file.
+
+![FreeRTOS Demo GIF](VID_20240319_000534-ezgif.com-video-to-gif-converter.gif)
+
+## Conclusion
+
+This project showcases how FreeRTOS, along with interrupts and semaphores, can be effectively used to manage concurrent tasks on microcontrollers like ATmega32. By leveraging synchronization mechanisms, developers can build robust and efficient embedded systems with ease.
