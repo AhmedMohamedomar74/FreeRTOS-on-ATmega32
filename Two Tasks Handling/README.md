@@ -27,5 +27,4 @@ Tasks can be suspended or delayed using FreeRTOS API functions like `vTaskDelay(
 Overall, FreeRTOS provides a flexible and efficient mechanism for multitasking on microcontrollers like ATmega32, enabling developers to build complex embedded systems with ease.
 
 ## Demo GIF
-
-![FreeRTOS Demo GIF](VID_20240318_141622-ezgif.com-video-to-gif-converter.gif)
+![VID_20240318_141622-ezgif com-video-to-gif-converter](https://github.com/AhmedMohamedomar74/FreeRTOS-on-ATmega32/assets/119351564/ac27c002-0fe6-4121-af4a-d577e15e5be6)
